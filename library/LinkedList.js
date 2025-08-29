@@ -41,6 +41,9 @@ export class LinkedList {
    * @returns {void}
    */
   append(node) {
+    if (!node || typeof node !== "object" || node.value === undefined) {
+      throw new Error("Invalid node: must be a Node instance with a value");
+    }
     if (!this.head) {
       this.head = node;
       this.tail = node;
@@ -61,13 +64,36 @@ export class LinkedList {
       console.log("List is empty");
       return;
     }
-    let current = head ? head : this.head;
+    let current = typeof head !== "undefined" ? head : this.head;
+    if (!current || typeof current.value === "undefined") {
+      console.log("Invalid head node");
+      return;
+    }
     let output = "";
+
     while (current) {
-      output += current.value;
+      output += String(current.value);
       if (current.next) output += " -> ";
       current = current.next;
     }
     console.log(output);
+  }
+
+  /**
+   * Makes the LinkedList iterable (for...of support)
+   */
+  [Symbol.iterator]() {
+    let current = this.head;
+    return {
+      next() {
+        if (current) {
+          const value = current.value;
+          current = current.next;
+          return { value, done: false };
+        } else {
+          return { done: true };
+        }
+      },
+    };
   }
 }

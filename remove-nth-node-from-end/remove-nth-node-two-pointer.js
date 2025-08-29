@@ -7,8 +7,8 @@ const testCase = [1],
   n = 1;
 // const testCase = [1, 2],
 //   n = 1;
-for (const value of testCase) {
-  ll.append(new Node(value));
+for (const val of testCase) {
+  ll.append(new Node(val));
 }
 
 const removeNthNode = (head, n) => {

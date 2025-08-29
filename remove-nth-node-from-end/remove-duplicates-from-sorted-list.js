@@ -15,7 +15,7 @@ const removeDuplicates = (head) => {
   let current = head;
   while (current) {
     let next = current.next;
-    while (next && current.value == next.value) {
+    while (next && current.val == next.val) {
       current.next = next.next;
       next = next.next;
     }

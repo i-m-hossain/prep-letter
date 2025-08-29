@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} Node
- * @property {*} value
+ * @property {*} val
  * @property {Node|null} [next]
  */
 
@@ -9,12 +9,12 @@
  */
 export class Node {
   /**
-   * @param {*} value
+   * @param {*} val
    * @param {Node|null} [next=null]
    */
-  constructor(value, next = null) {
+  constructor(val, next = null) {
     /** @type {*} */
-    this.value = value;
+    this.val = val;
     /** @type {Node|null} */
     this.next = next;
   }
@@ -41,8 +41,8 @@ export class LinkedList {
    * @returns {void}
    */
   append(node) {
-    if (!node || typeof node !== "object" || node.value === undefined) {
-      throw new Error("Invalid node: must be a Node instance with a value");
+    if (!node || typeof node !== "object" || node.val === undefined) {
+      throw new Error("Invalid node: must be a Node instance with a val");
     }
     if (!this.head) {
       this.head = node;
@@ -65,14 +65,14 @@ export class LinkedList {
       return;
     }
     let current = typeof head !== "undefined" ? head : this.head;
-    if (!current || typeof current.value === "undefined") {
+    if (!current || typeof current.val === "undefined") {
       console.log("Invalid head node");
       return;
     }
     let output = "";
 
     while (current) {
-      output += String(current.value);
+      output += String(current.val);
       if (current.next) output += " -> ";
       current = current.next;
     }
@@ -87,9 +87,9 @@ export class LinkedList {
     return {
       next() {
         if (current) {
-          const value = current.value;
+          const val = current.val;
           current = current.next;
-          return { value, done: false };
+          return { val, done: false };
         } else {
           return { done: true };
         }
